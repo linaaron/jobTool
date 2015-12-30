@@ -26,8 +26,8 @@ public class JobMain {
         }
     }
 
-    public static void main(String[] args) {
-        init();
-    }
+//    public static void main(String[] args) {
+//        init();
+//    }
 
 }

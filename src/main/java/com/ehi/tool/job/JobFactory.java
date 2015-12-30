@@ -17,7 +17,7 @@ public class JobFactory implements org.quartz.Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         JobInfo JobInfo = (JobInfo) context.getMergedJobDataMap().get("jobInfo");
-        LOG.info("job begin = [" + JobInfo.getJobName() + "]");
+        LOG.info("job begin: [" + JobInfo.getJobName() + "]");
         try {
             Class<?> taskJob = Class.forName(JobInfo.getTargetObject());
             Method[] methods = taskJob.getMethods();
@@ -36,6 +36,6 @@ public class JobFactory implements org.quartz.Job {
         } catch (InstantiationException e) {
             LOG.error("JobFactory.execute error: " + e.getMessage());
         }
-        LOG.info("job end = [" + JobInfo.getJobName() + "]");
+        LOG.info("job end: [" + JobInfo.getJobName() + "]");
     }
 }

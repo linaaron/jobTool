@@ -14,3 +14,9 @@
 
 # Maven
 **/target/*
+
+# Tomcat
+**/logs/*
+**/work/Catalina/**
+**/tomcat/*.pid
+
