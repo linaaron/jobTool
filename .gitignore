@@ -17,6 +17,7 @@
 
 # Tomcat
 **/logs/*
-**/work/Catalina/**
+**/work/**
+**/webapps/**
 **/tomcat/*.pid
 

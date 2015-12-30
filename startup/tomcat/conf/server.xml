@@ -100,7 +100,7 @@
     <!-- You should set jvmRoute to support load-balancing via AJP ie :
     <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
     -->
-    <Engine name="Catalina" defaultHost="localhost" jvmRoute="TomcatOne">
+    <Engine name="Catalina" defaultHost="localhost">
 
       <!--For clustering, please take a look at documentation at:
           /docs/cluster-howto.html  (simple how to)
@@ -121,10 +121,9 @@
       </Realm>
 
       <Host name="localhost"  appBase="webapps"
-            unpackWARs="true" autoDeploy="true">
+            unpackWARs="false" autoDeploy="false">
 		
-		<!--<Context path="/jobTool" crossContext="true" docBase="${JOB_TOOL_HOME}\target\jobTool" debug="1" reloadable="true" cookies="true" />-->
-		<Context path="/jobTool" crossContext="true" docBase="D:/aaronl/jobTool/target/jobTool" debug="1" reloadable="true" cookies="true" />
+		<!--<Context path="/jobTool" crossContext="true" docBase="D:/aaronl/jobTool/target/jobTool" debug="1" reloadable="true" cookies="true" />-->
 
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->
