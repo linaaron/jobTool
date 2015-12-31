@@ -21,4 +21,13 @@
             JOB_DEV
         ]]>
     </select>
+
+    <select id="getJobById" resultMap="jobDetail">
+        <![CDATA[
+        SELECT *
+        FROM
+            JOB_DEV
+        WHERE JOB_ID = #{jobId}
+        ]]>
+    </select>
 </mapper>

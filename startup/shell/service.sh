@@ -8,7 +8,6 @@ function packageWar() {
 
 function startTomcat() {
     echo "start tomcat..."
-    export JOB_TOOL_HOME=$( cd "$BASE_DIR" && pwd )
 
     export CATALINA_HOME="$BASE_DIR/startup/tomcat"
     export JAVA_OPTS="-Dcatalina.home=$CATALINA_HOME -Dcatalina.base=$CATALINA_HOME -ms256m -mx1024m  -XX:MaxPermSize=160m -Duser.language=en -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true"
@@ -20,9 +19,15 @@ function startTomcat() {
         mkdir $CATALINA_HOME/logs
     fi
 
+    if [[ ! -e $CATALINA_HOME/temp ]]
+    then
+        mkdir $CATALINA_HOME/temp
+    fi
+
     if [[ -e $CATALINA_HOME/webapps ]]
     then
         rm -rf $CATALINA_HOME/webapps
+        mkdir $CATALINA_HOME/webapps
         cp -rp $BASE_DIR/target/jobTool.war $CATALINA_HOME/webapps
     else
         mkdir $CATALINA_HOME/webapps
@@ -43,7 +48,7 @@ function stopTomcat() {
     then
         $CATALINA_HOME/bin/catalina.sh stop -force
     else
-        echo "no tomcat $1 pid"
+        echo "no tomcat pid"
     fi
 
     echo "-------------------------------------------------------"
