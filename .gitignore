@@ -4,7 +4,7 @@
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-**/*.iml
+/jobTool.iml
 
 ## Directory-based project format:
 .idea/
@@ -13,11 +13,11 @@
 **/out/*
 
 # Maven
-**/target/*
+/target/*
 
 # Tomcat
-**/logs/*
-**/work/**
-**/webapps/**
+**/tomcat/logs/*
+**/tomcat/work/**
+**/tomcat/webapps/**
 **/tomcat/*.pid
 
