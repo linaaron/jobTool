@@ -122,7 +122,9 @@
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="false" autoDeploy="false">
-		
+
+        <!--<Host name="localhost"  appBase="webapps"-->
+              <!--unpackWARs="true" autoDeploy="true">-->
 		<!--<Context path="/jobTool" crossContext="true" docBase="D:/aaronl/jobTool/target/jobTool" debug="1" reloadable="true" cookies="true" />-->
 
         <!-- SingleSignOn valve, share authentication between web applications

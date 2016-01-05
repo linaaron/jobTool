@@ -7,5 +7,12 @@ import java.util.List;
 
 public interface JobInfoDAO {
     List<JobInfo> getJobDetails();
-    JobInfo getJobById(@Param("jobId") Integer jobId);
+
+    JobInfo getJobById(@Param("jobId") String jobId);
+
+    void createJob(JobInfo jobInfo);
+
+    void updateJob(JobInfo jobInfo);
+
+    void delJob(@Param("jobId") String jobId);
 }

@@ -15,8 +15,6 @@ public class JobInfo {
 
     private String cronExpression;
 
-    private String concurrent;
-
     public String getJobId() {
         return jobId;
     }
@@ -71,13 +69,5 @@ public class JobInfo {
 
     public void setCronExpression(String cronExpression) {
         this.cronExpression = cronExpression;
-    }
-
-    public String getConcurrent() {
-        return concurrent;
-    }
-
-    public void setConcurrent(String concurrent) {
-        this.concurrent = concurrent;
     }
 }

@@ -3,73 +3,17 @@
 <html>
 <head>
     <title>job list</title>
-    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="/jobTool/js/jquery-1.9.1.min.js"></script>
+    <script src="/jobTool/js/jquery-2.1.4.min.js"></script>
+    <link href="/jobTool/js/bootstrap.min.css" rel="stylesheet">
+    <script src="/jobTool/js/bootstrap.min.js"></script>
     <script src="/jobTool/js/jobList.js"></script>
 </head>
 <body>
 <br/>
-<div class="row">
-    <div class="col-xs-6">
-        <form class="form-horizontal">
-            <input type="hidden" id="jobId" name="jobId"/>
-            <div class="form-group">
-                <label for="jobName" class="col-sm-2 control-label">jobName</label>
-                <div class="col-sm-10">
-                    <input type="text" style="width: 300px;" class="form-control" id="jobName" placeholder="jobName">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="jobGroup" class="col-sm-2 control-label">jobGroup</label>
-                <div class="col-sm-10">
-                    <input type="text" style="width: 300px;" class="form-control" id="jobGroup" placeholder="jobGroup">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="targetObject" class="col-sm-2 control-label">targetObject</label>
-                <div class="col-sm-10">
-                    <input type="text" style="width: 300px;" class="form-control" id="targetObject"
-                           placeholder="jobGroup">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="targetMethod" class="col-sm-2 control-label">targetMethod</label>
-                <div class="col-sm-10">
-                    <input type="text" style="width: 300px;" class="form-control" id="targetMethod"
-                           placeholder="jobGroup">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="cronExpression" class="col-sm-2 control-label">cronExpression</label>
-                <div class="col-sm-10">
-                    <input type="text" style="width: 300px;" class="form-control" id="cronExpression"
-                           placeholder="jobGroup">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="jobStatus" class="col-sm-2 control-label">jobStatus</label>
-                <div class="col-sm-10" id="jobStatus">
-                    <select class="form-control" style="width: 100px;">
-                        <option value="0">off</option>
-                        <option value="1">on</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" class="btn btn-primary btn-lg">Save Job</button>
-                    <button type="button" class="btn btn-success btn-lg">Edit Job</button>
-                    <button type="reset" class="btn btn-warning btn-lg">Reset</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-xs-6">
-        <p class="lead">cronExpression:</p>
-    </div>
-</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobDetail" data-job-id="">Add Job
+</button>
+<br/>
+<br/>
 
 <table class="table table-hover table-bordered">
     <thead>
@@ -88,17 +32,94 @@
     <c:forEach items="${jobInfoList}" var="jobInfo" varStatus="status">
         <tr class="warning">
             <th>${status.index+1}</th>
-            <th><a class="edit-job" data-job-id="${jobInfo.jobId}"
-                   href="javascript:void(0);">${jobInfo['jobName']}</a></th>
+            <th>${jobInfo['jobName']}</th>
             <th>${jobInfo['jobGroup']}</th>
             <th>${jobInfo['targetObject']}</th>
             <th>${jobInfo['targetMethod']}</th>
             <th>${jobInfo['cronExpression']}</th>
             <th>${jobInfo['jobStatus'] eq 1 ? 'on':'off'}</th>
-            <th><button type="button" class="btn btn-danger btn-xs">del job</button></th>
+            <th>
+                <button type="button" data-toggle="modal" data-target="#jobDetail" data-job-id="${jobInfo.jobId}"
+                        class="btn btn-success btn-xs">edit job
+                </button>
+                <button type="button" onclick="delJob('${jobInfo.jobId}')" class="btn btn-danger btn-xs">del job
+                </button>
+            </th>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+<div class="modal fade" id="jobDetail" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Job Detail</h4>
+            </div>
+            <form action="/jobTool/job/save.do" class="job-submit" id="job-submit" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="jobId" name="jobId"/>
+
+                    <div class="form-group">
+                        <label for="jobName" class="control-label">jobName</label>
+                        <input type="text" class="form-control" id="jobName" name="jobName" placeholder="jobName">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobGroup" class="control-label">jobGroup</label>
+                        <input type="text" class="form-control" id="jobGroup" name="jobGroup" placeholder="jobGroup">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetObject" class="control-label">targetObject</label>
+                        <input type="text" class="form-control" id="targetObject" name="targetObject"
+                               placeholder="targetObject">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetMethod" class="control-label">targetMethod</label>
+                        <input type="text" class="form-control" id="targetMethod" name="targetMethod"
+                               placeholder="targetMethod">
+                    </div>
+                    <div class="form-group">
+                        <label for="cronExpression" class="control-label">cronExpression</label>
+                        <input type="text" class="form-control" id="cronExpression" name="cronExpression"
+                               placeholder="0/5 * * * * ?">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobStatus" class="control-label">jobStatus</label>
+                        <select class="form-control" id="jobStatus" name="jobStatus">
+                            <option value="0">off</option>
+                            <option value="1">on</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delJob">
+    <div class="modal-dialog">
+        <div class="modal-content message_align">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title">message</h4>
+            </div>
+            <div class="modal-body">
+                <h2>Are you sure to delete?</h2>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="delJobId"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a onclick="delSubmit()" class="btn btn-success" data-dismiss="modal">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

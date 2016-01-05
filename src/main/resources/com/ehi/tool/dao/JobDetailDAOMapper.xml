@@ -11,7 +11,6 @@
         <result column="TARGET_METHOD" property="targetMethod"></result>
         <result column="JOB_STATUS" property="jobStatus"></result>
         <result column="CORN_EXPRESSION" property="cronExpression"></result>
-        <result column="CONCURRENT" property="concurrent"></result>
     </resultMap>
 
     <select id="getJobDetails" resultMap="jobDetail">
@@ -30,4 +29,52 @@
         WHERE JOB_ID = #{jobId}
         ]]>
     </select>
+
+    <delete id="delJob">
+        <![CDATA[
+        DELETE
+        FROM
+            JOB_DEV
+        WHERE JOB_ID = #{jobId}
+        ]]>
+    </delete>
+
+    <insert id="createJob" parameterType="com.ehi.tool.domain.JobInfo">
+        <![CDATA[
+            INSERT INTO JOB_DEV
+            (
+                JOB_ID,
+                JOB_NAME,
+                JOB_GROUP,
+                TARGET_OBJECT,
+                TARGET_METHOD,
+                JOB_STATUS,
+                CORN_EXPRESSION
+            )
+            VALUES
+            (
+                #{jobId},
+                #{jobName},
+                #{jobGroup},
+                #{targetObject},
+                #{targetMethod},
+                #{jobStatus},
+                #{cronExpression}
+            )
+        ]]>
+    </insert>
+
+    <update id="updateJob" parameterType="com.ehi.tool.domain.JobInfo">
+        <![CDATA[
+            UPDATE JOB_DEV
+            SET
+            JOB_NAME = #{jobName},
+            JOB_GROUP = #{jobGroup},
+            TARGET_OBJECT = #{targetObject},
+            TARGET_METHOD = #{targetMethod},
+            JOB_STATUS = #{jobStatus},
+            CORN_EXPRESSION = #{cronExpression}
+            WHERE JOB_ID = #{jobId}
+        ]]>
+    </update>
 </mapper>

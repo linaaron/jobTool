@@ -1,19 +1,50 @@
-$(function(){
-    $(".edit-job").bind('click',function(){
-        var jobId = $(this).data('jobId');
+$(function () {
+    $('#jobDetail').on('show.bs.modal', function (event) {
+        $(".job-submit")[0].reset();
+        var button = $(event.relatedTarget);
+        var jobId = button.data('jobId');
 
-        $.ajax({
-            url:"",
-            type: 'GET',
-            dataType: "json",
-            contentType: 'application/json',
-            success : function(collection, response, options) {
-
-            },
-            error : function(){
-
-            }
-
-        });
+        if (jobId !== "") {
+            $.ajax({
+                url: "/jobTool/job/detail/" + jobId + ".do",
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#jobId").val(data.jobId);
+                    $("#jobName").val(data.jobName);
+                    $("#jobGroup").val(data.jobGroup);
+                    $("#targetObject").val(data.targetObject);
+                    $("#targetMethod").val(data.targetMethod);
+                    $("#cronExpression").val(data.cronExpression);
+                    $("#jobStatus").val(data.jobStatus);
+                },
+                error: function () {
+                    console.log("get job detail error" + jobId);
+                }
+            });
+        }
     });
 });
+
+function delJob(delJobId) {
+    $('#delJobId').val(delJobId);
+    $('#delJob').modal();
+}
+
+function delSubmit() {
+    var delJobId = $.trim($("#delJobId").val());
+
+    $.ajax({
+        url: '/jobTool/job/del/' + delJobId + '.do',
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json',
+        success: function (data) {
+            window.location.href = "/jobTool/job/list.do";
+        },
+        error: function () {
+            console.log("del job error" + delJobId);
+        }
+    });
+}
