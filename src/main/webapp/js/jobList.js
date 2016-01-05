@@ -6,7 +6,7 @@ $(function () {
 
         if (jobId !== "") {
             $.ajax({
-                url: "/jobTool/job/detail/" + jobId + ".do",
+                url: "/jobTool/job/detail/" + jobId,
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/json',
@@ -36,12 +36,12 @@ function delSubmit() {
     var delJobId = $.trim($("#delJobId").val());
 
     $.ajax({
-        url: '/jobTool/job/del/' + delJobId + '.do',
+        url: '/jobTool/job/del/' + delJobId,
         type: 'POST',
         dataType: "json",
         contentType: 'application/json',
         success: function (data) {
-            window.location.href = "/jobTool/job/list.do";
+            window.location.href = "/jobTool/job/list";
         },
         error: function () {
             console.log("del job error" + delJobId);

@@ -3,10 +3,10 @@
 <html>
 <head>
     <title>job list</title>
-    <script src="/jobTool/js/jquery-2.1.4.min.js"></script>
-    <link href="/jobTool/js/bootstrap.min.css" rel="stylesheet">
-    <script src="/jobTool/js/bootstrap.min.js"></script>
-    <script src="/jobTool/js/jobList.js"></script>
+    <script src="<c:url value='/js/jquery-2.1.4.min.js'/>"></script>
+    <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+    <script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+    <script src="<c:url value='/js/jobList.js'/>"></script>
 </head>
 <body>
 <br/>
@@ -58,7 +58,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Job Detail</h4>
             </div>
-            <form action="/jobTool/job/save.do" class="job-submit" id="job-submit" method="post">
+            <form action="/jobTool/job/save" class="job-submit" id="job-submit" method="post">
                 <div class="modal-body">
                     <input type="hidden" id="jobId" name="jobId"/>
 
